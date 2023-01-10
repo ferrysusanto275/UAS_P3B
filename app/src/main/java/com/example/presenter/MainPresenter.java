@@ -20,11 +20,15 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class MainPresenter  {
     private MainUI ui;
     private Context context;
     private final static String  authURL = Config.BASE_URL + "authenticate";
     private Gson gson;
+    public final static String[] arrRole={"student","lecturer","admin"};
+
 
     public MainPresenter(MainUI ui) {
         this.ui = ui;

@@ -49,12 +49,17 @@
             android:layout_height="wrap_content"
             android:text="Role"
             android:textSize="20sp" />
-        <EditText
-            android:id="@+id/et_role"
+<!--        <EditText-->
+<!--            android:id="@+id/et_role"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textAlignment="center"/>-->
+        <Spinner
+            android:id="@+id/spiner_role"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:textSize="20sp"
-            android:textAlignment="center"/>
+            />
         <Button
             android:id="@+id/btn_login"
             android:layout_gravity="center"
