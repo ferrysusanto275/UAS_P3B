@@ -2,6 +2,8 @@ package com.example.uas_p3b;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +51,22 @@ public class PengumumanFragment extends Fragment implements PengumumanUI, View.O
         binding.next.setOnClickListener(this);
         binding.filter.setOnClickListener(this);
         binding.btnTambah.setOnClickListener(this);
+        binding.searchTitle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.callAPI(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         return binding.getRoot();
 

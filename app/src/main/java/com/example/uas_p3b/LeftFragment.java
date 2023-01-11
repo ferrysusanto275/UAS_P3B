@@ -42,7 +42,7 @@ public class LeftFragment extends Fragment implements LeftUI {
     @Override
     public void listenerOnClick(String page) {
         switch (page){
-            case "Exit": this.getParentFragmentManager().setFragmentResult("closeApp",new Bundle());
+            case "Keluar": this.getParentFragmentManager().setFragmentResult("closeApp",new Bundle());
                 break;
             default:
                 Bundle res = new Bundle();

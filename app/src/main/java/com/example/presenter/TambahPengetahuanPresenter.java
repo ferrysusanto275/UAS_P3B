@@ -54,7 +54,7 @@ public class TambahPengetahuanPresenter {
         }
         this.inputPengumuman= new InputPengumuman(title,content,tagInput);
         //melakukan ambil tag untuk cek data tag sudah ada atu belum
-        callAPI("ambilTag",null);
+        ambilTags();
     }
     private boolean cekTag(String tag){
         boolean flag =false;
@@ -77,41 +77,67 @@ public class TambahPengetahuanPresenter {
                 inputAllTag();
             }else{
                 //kalau ga ketemu input
-                callAPI("inputTag",gson.toJson(new InputTag(tagInput)));
+                postAPI("inputTag",gson.toJson(new InputTag(tagInput)));
             }
         }else{
             //jika semua tag sudah di input set balik tag
             this.inputPengumuman.setTags(this.tagInput);
             //input ke pengumuman
-            callAPI("inputPengumuman",gson.toJson(this.inputPengumuman));
+            postAPI("inputPengumuman",gson.toJson(this.inputPengumuman));
+        }
+    }
+    private  void getApi(){
+        RequestQueue requestQueue = Volley.newRequestQueue(ui.getCtx());
+    }
+    private  void postAPI(String ngapain,String json){
+        try {
+            JSONObject obj= new JSONObject(json);
+            String BASE_URL=tagsURL;
+            if(ngapain.equals("inputPengumuman"))BASE_URL=announcementsURL;
+            RequestQueue requestQueue = Volley.newRequestQueue(ui.getCtx());
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL, obj, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (ngapain.equals("inputPengumuman")) {
+                            memprosesInputPengumuman(response.toString());
+                        } else {
+                            memprosesInputTag(response.toString());
+                        }
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    ui.menampilkanError(error.toString());
+                }
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("Authorization", "Bearer " + ui.getToken());
+                        return map;
+                    }
+                }
+            };
+            requestQueue.add(jsonObjectRequest);
+        }catch (JSONException e){
+            e.printStackTrace();
         }
     }
 
-    private void callAPI(String ngapain,String json){
-        String BaseURL=tagsURL;
-        if(ngapain.equals("inputPengumuman")){
-            BaseURL=announcementsURL;
-        }
-        int reqMethod=Request.Method.GET;
-        Log.d( "ngapain: ",ngapain);
-        Log.d( "url: ",BaseURL);
-        if(ngapain.equals("inputTag")||ngapain.equals("inputPengumuman")){
-            reqMethod=Request.Method.POST;
-            Log.d( "json: ",json);
-        }
+    private void ambilTags(){
         RequestQueue queue = Volley.newRequestQueue(this.ui.getCtx());
-        StringRequest stringRequest = new StringRequest(reqMethod,
-                BaseURL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                tagsURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d( "onResponse: ",response);
                 try {
-                    if(ngapain.equals("ambilTag")){
-                        memprosesKeluaranTags(response);
-                    }else if(ngapain.equals("inputTag")){
-                        memprosesInputTag(response);
-                    }else if(ngapain.equals("inputPengumuman")){
-                        memprosesInputPengumuman(response);
-                    }
+                    memprosesKeluaranTags(response);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -123,14 +149,10 @@ public class TambahPengetahuanPresenter {
             }
         }){
             @Override
-            public byte[] getBody() throws AuthFailureError {
-
-                return json.getBytes();
-            }
-            @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
                 map.put("Authorization","Bearer "+ui.getToken());
+//                Log.d( "token: ",ui.getToken());
                 return map;
             }
         };
