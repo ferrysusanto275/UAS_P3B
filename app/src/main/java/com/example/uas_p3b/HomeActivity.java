@@ -98,7 +98,12 @@ public class HomeActivity extends AppCompatActivity implements HomeUI {
                 }else{
                     Toast.makeText(this, "Bukan Mahasiswa", Toast.LENGTH_SHORT).show();
                 }
-
+            case "detailSemester":
+                SemesterFragment sf= new SemesterFragment(this);
+                sf.setArguments(bundle);
+                ft.replace(binding.fragmentContainer.getId(), sf);
+                ft.addToBackStack(null);
+                break;
 
         }
 
