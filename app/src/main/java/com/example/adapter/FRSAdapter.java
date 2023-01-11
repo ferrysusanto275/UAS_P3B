@@ -3,6 +3,7 @@ package com.example.adapter;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -82,11 +83,13 @@ public class FRSAdapter extends BaseAdapter {
             int tahun = tahundansemester/10;
             String semester = map.get(tahundansemester%10);
             binding.smt.setText(semester+" "+tahun+"/"+(tahun+1));
+            binding.containerSemester.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View view) {
+            Log.d( "onClick: ",ui.getActiveYear()+"");
             if(view==binding.containerSemester){
                 int tahun = tahundansemester/10;
                 String semester = map.get(tahundansemester%10);

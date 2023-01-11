@@ -17,19 +17,17 @@ import com.example.model.InputTag;
 import com.example.model.Pengumuman;
 import com.example.model.Tags;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TambahPengetahuanPresenter {
+public class TambahPengumumanPresenter {
     private TambahPengumumanUI ui;
     private final static String announcementsURL = Config.BASE_URL + "announcements";
     private final static String tagsURL = Config.BASE_URL + "tags";
@@ -39,7 +37,7 @@ public class TambahPengetahuanPresenter {
     private InputPengumuman inputPengumuman;
 
 
-    public TambahPengetahuanPresenter(TambahPengumumanUI ui) {
+    public TambahPengumumanPresenter(TambahPengumumanUI ui) {
         this.ui = ui;
         this.gson=new Gson();
         this.tagsList=new ArrayList<>();

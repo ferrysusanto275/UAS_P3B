@@ -12,13 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.contract.TambahPengumumanUI;
-import com.example.presenter.TambahPengetahuanPresenter;
+import com.example.presenter.TambahPengumumanPresenter;
 import com.example.uas_p3b.databinding.TambahPengumumanBinding;
 
 public class TambahPengumumanFragment extends Fragment implements TambahPengumumanUI,View.OnClickListener {
     private TambahPengumumanBinding binding;
     private String token;
-    private TambahPengetahuanPresenter presenter;
+    private TambahPengumumanPresenter presenter;
 
     public TambahPengumumanFragment(String token) {
         this.token = token;
@@ -31,7 +31,7 @@ public class TambahPengumumanFragment extends Fragment implements TambahPengumum
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding=TambahPengumumanBinding.inflate(inflater,container,false);
-        presenter= new TambahPengetahuanPresenter(this);
+        presenter= new TambahPengumumanPresenter(this);
         binding.btnSimpan.setOnClickListener(this);
 
         return binding.getRoot();
