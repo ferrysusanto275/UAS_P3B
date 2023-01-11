@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.adapter.PengumumanAdapter;
+import com.example.contract.HomeUI;
 import com.example.contract.PengumumanUI;
 import com.example.model.Pengumuman;
 import com.example.presenter.PengumumanPresenter;
@@ -26,14 +27,15 @@ public class PengumumanFragment extends Fragment implements PengumumanUI, View.O
     private PengumumanBinding binding;
     private PengumumanAdapter adapter;
     private PengumumanPresenter presenter;
-    //token buat get apinya
-    private String token;
+    //get token dan role
+    private HomeUI homeUI;
 
-    public PengumumanFragment(String token) {
-        this.token = token;
+    public PengumumanFragment(HomeUI homeUI) {
+        this.homeUI = homeUI;
     }
-    public static PengumumanFragment newInstance(String token){
-        return new PengumumanFragment(token);
+
+    public static PengumumanFragment newInstance(HomeUI homeUI){
+        return new PengumumanFragment(homeUI);
     }
 
     @Nullable
@@ -93,7 +95,12 @@ public class PengumumanFragment extends Fragment implements PengumumanUI, View.O
 
     @Override
     public String getToken() {
-        return token;
+        return homeUI.getToken();
+    }
+
+    @Override
+    public String getRole() {
+        return homeUI.getRole();
     }
 
     @Override
@@ -108,6 +115,16 @@ public class PengumumanFragment extends Fragment implements PengumumanUI, View.O
 
         }else{
             binding.next.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void setVisibleBtnTambah(boolean visible) {
+        if(visible){
+            binding.btnTambah.setVisibility(View.VISIBLE);
+
+        }else{
+            binding.btnTambah.setVisibility(View.INVISIBLE);
         }
     }
 

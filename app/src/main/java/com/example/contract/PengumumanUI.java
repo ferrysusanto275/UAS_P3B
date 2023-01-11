@@ -14,8 +14,10 @@ public interface PengumumanUI {
     public void setFilter(String Filter);
     public String getTitle();
     public String getToken();
+    public String getRole();
     public void menampilkanError(String error);
     public void setVisibleBtnNext(boolean visible);
+    public void setVisibleBtnTambah(boolean visible);
     public void loadingAdapter();
     public void noDataAdapter();
     //untuk mengupdate smua list yang ada

@@ -48,6 +48,7 @@ public class PengumumanPresenter {
         this.checkTag = new LinkedList<>();
         this.checkTagId = new LinkedList<>();
         this.sp = this.ui.getAct().getPreferences(Context.MODE_PRIVATE);
+        this.ui.setVisibleBtnTambah(this.ui.getRole().equals("lecturer"));
         this.ambilTags();
         this.callAPI(false);
     }
