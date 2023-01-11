@@ -44,16 +44,6 @@ public class FilterPresenter {
         this.list=new LinkedList<>();
         this.tagsList=new ArrayList<>();
         this.gson=new Gson();
-//        hashMap = new HashMap<>();
-//        if(sp.contains("checkTag")){
-        if(sp.getString("checkTag","").equals("")){
-            dicheck = new ArrayList<>();
-        }
-        else{
-            dicheck = new ArrayList<>(Arrays.asList(sp.getString("checkTag","").split(",")));
-        }
-
-//        }
         callAPI();
     }
     public void callAPI(){
@@ -84,6 +74,12 @@ public class FilterPresenter {
         queue.add(stringRequest);
     }
     public void memprosesKeluaranBerhasil(String response) throws JSONException {
+        if(sp.getString("checkTag","").equals("")){
+            dicheck = new ArrayList<>();
+        }
+        else{
+            dicheck = new ArrayList<>(Arrays.asList(sp.getString("checkTag","").split(",")));
+        }
         this.tagsList=this.gson.fromJson(response,new TypeToken<ArrayList<Tags>>(){}.getType());
         for (Tags tag :this.tagsList) {
             list.add(new Filter(tag,dicheck.contains(tag.getTag())));
@@ -98,28 +94,26 @@ public class FilterPresenter {
 
     }
     public void onChangeClick(String text,boolean isChecked){
-        Log.d( "onChangeClick: ",text);
         if(isChecked){
             dicheck.add(text);
-        }
-        else{
+        }else{
+            Log.d("onChangeClick: ","masuk");
             dicheck.remove(text);
         }
+        Log.d( "onChangeClick: ",this.gson.toJson(dicheck));
     }
     public void onApply(){
-        SharedPreferences.Editor editor = sp.edit();
         String id="";
         String stringTag = "";
 //        for(int i=0;i<dicheck.size();i++){
-            for (Tags tag:this.tagsList) {
-                    if(dicheck.contains(tag.getTag())){
-                        id+=tag.getId()+",";
-                        stringTag+=tag.getTag()+",";
-                    }
+        for (Tags tag:this.tagsList) {
+            if(dicheck.contains(tag.getTag())){
+                id+=tag.getId()+",";
+                stringTag+=tag.getTag()+",";
             }
+        }
 //        }
-        Log.d( "idCheck: ",id);
-        Log.d( "tag: ",stringTag);
+        SharedPreferences.Editor editor = sp.edit();
         if(id.length()!=0){
             editor.putString("checkTagId",id.substring(0,id.length()-1));
         }
