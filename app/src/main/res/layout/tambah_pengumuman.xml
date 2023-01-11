@@ -26,6 +26,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/et_title"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border">
@@ -41,6 +42,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/et_tags"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border">
@@ -56,6 +58,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/et_content"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:background="@drawable/border">
@@ -63,6 +66,7 @@
         </EditText>
 
         <Button
+            android:id="@+id/btn_simpan"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Simpan"

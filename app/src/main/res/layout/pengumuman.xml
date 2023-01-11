@@ -101,5 +101,15 @@
         </ImageButton>
 
     </LinearLayout>
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/round_btn"
+        android:text="+"
+        android:textSize="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_tambah">
+    </Button>
 
 </RelativeLayout>

@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.contract.HomeFragmentUI;
 import com.example.contract.HomeUI;
+import com.example.presenter.HomeFragmentPresenter;
 import com.example.uas_p3b.databinding.HomeFragmentBinding;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, HomeFragmentUI {
     private HomeFragmentBinding binding;
     private HomeUI homeUI;
+    private HomeFragmentPresenter presenter;
 
     public HomeFragment(HomeUI homeUI) {
         this.homeUI = homeUI;
@@ -28,6 +30,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         binding.pengumuman.setOnClickListener(this);
         binding.keluar.setOnClickListener(this);
         binding.frs.setOnClickListener(this);
+        presenter= new HomeFragmentPresenter(this);
         return binding.getRoot();
     }
 
@@ -57,6 +60,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 
     @Override
     public void enableBTNFRS(boolean enable) {
-        binding.frs.setEnabled(enable);
+
+        if(enable){
+            binding.frs.setVisibility(View.VISIBLE);
+
+        }else{
+            binding.frs.setVisibility(View.INVISIBLE);
+        }
     }
 }

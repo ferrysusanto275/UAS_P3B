@@ -77,6 +77,7 @@ public class PengumumanAdapter extends BaseAdapter {
             for(int i=0;i<pengumuman.getTags().size();i++){
                 tags+=pengumuman.getTags().get(i).getTag()+",";
             }
+            if(!tags.equals(""))
             tags = tags.substring(0,tags.length()-1);
             binding.TampilTags.setText(tags);
             binding.pengumuman.setOnClickListener(this);

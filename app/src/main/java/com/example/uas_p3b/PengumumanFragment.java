@@ -46,6 +46,7 @@ public class PengumumanFragment extends Fragment implements PengumumanUI, View.O
         binding.refresh.setOnClickListener(this);
         binding.next.setOnClickListener(this);
         binding.filter.setOnClickListener(this);
+        binding.btnTambah.setOnClickListener(this);
 
         return binding.getRoot();
 
@@ -62,6 +63,11 @@ public class PengumumanFragment extends Fragment implements PengumumanUI, View.O
             FilterDialogFragment filter = new FilterDialogFragment(this);
             FragmentTransaction ft = getParentFragmentManager().beginTransaction();
             filter.show(ft,"filter");
+        }else if(view==binding.btnTambah){
+            //pindah ke tambah pengumuman
+            Bundle result = new Bundle();
+            result.putString("page","tambah_pengumuman");
+            getParentFragmentManager().setFragmentResult("changePage",result);
         }
     }
 

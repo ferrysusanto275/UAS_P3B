@@ -86,6 +86,10 @@ public class HomeActivity extends AppCompatActivity implements HomeUI {
                 ft.replace(binding.fragmentContainer.getId(), PengumumanFragment.newInstance(token));
                 ft.addToBackStack(null);
                 break;
+            case "tambah_pengumuman":
+                ft.replace(binding.fragmentContainer.getId(), TambahPengumumanFragment.newInstance(token));
+                ft.addToBackStack(null);
+                break;
             case "frs":
                 if(this.role.equals("student")){
                     ft.replace(binding.fragmentContainer.getId(), FRSFragment.newInstance(this));
