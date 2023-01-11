@@ -95,7 +95,9 @@ public class FilterPresenter {
     }
     public void onChangeClick(String text,boolean isChecked){
         if(isChecked){
-            dicheck.add(text);
+            if(!dicheck.contains(text)){
+                dicheck.add(text);
+            }
         }else{
             Log.d("onChangeClick: ","masuk");
             dicheck.remove(text);
